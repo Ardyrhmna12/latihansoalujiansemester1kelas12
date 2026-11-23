@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUR ANTIKA DIGITAL LEARNING — Latihan KKA XII TKJ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter, Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepNavy: '#071426',
+                        darkBlue: '#0B1F38',
+                        electricBlue: '#1677FF',
+                        cyberCyan: '#21D4FD',
+                        goldAccent: '#F4C76B',
+                        correctGreen: '#20C997',
+                        wrongRed: '#FF5C70',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --deep-navy: #071426;
+            --dark-blue: #0B1F38;
+            --electric-blue: #1677FF;
+            --cyan: #21D4FD;
+            --gold: #F4C76B;
+            --green: #20C997;
+            --red: #FF5C70;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--deep-navy);
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 12% 18%, rgba(22, 119, 255, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 88% 82%, rgba(33, 212, 253, 0.15) 0%, transparent 45%),
+                linear-gradient(rgba(33, 212, 253, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(33, 212, 253, 0.04) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(11, 31, 56, 0.74);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(33, 212, 253, 0.24);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-light {
+            background: rgba(16, 44, 78, 0.56);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+        }
+
+        /* Neon Glows */
+        .neon-border-cyan {
+            border-color: #21D4FD !important;
+            box-shadow: 0 0 22px rgba(33, 212, 253, 0.42), inset 0 0 14px rgba(33, 212, 253, 0.18) !important;
+        }
+
+        .neon-border-blue {
+            border-color: #1677FF !important;
+            box-shadow: 0 0 24px rgba(22, 119, 255, 0.45) !important;
+        }
+
+        .neon-border-green {
+            border-color: #20C997 !important;
+            background: rgba(32, 201, 151, 0.16) !important;
+            box-shadow: 0 0 26px rgba(32, 201, 151, 0.42), inset 0 0 16px rgba(32, 201, 151, 0.2) !important;
+        }
+
+        .neon-border-red {
+            border-color: #FF5C70 !important;
+            background: rgba(255, 92, 112, 0.16) !important;
+            box-shadow: 0 0 26px rgba(255, 92, 112, 0.42), inset 0 0 16px rgba(255, 92, 112, 0.2) !important;
+        }
+
+        .btn-primary-glow {
+            background: linear-gradient(135deg, #1677FF 0%, #0EA5E9 50%, #21D4FD 100%);
+            box-shadow: 0 8px 28px rgba(22, 119, 255, 0.45), 0 0 16px rgba(33, 212, 253, 0.35);
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .btn-primary-glow:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 12px 34px rgba(33, 212, 253, 0.6);
+        }
+
+        .btn-primary-glow:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        /* Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(2deg); }
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 0.35; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .animate-pulse-ring {
+            animation: pulseRing 4s ease-in-out infinite;
+        }
+
+        .view-transition {
+            animation: fadeSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Option Cards Touch & Hover */
+        .option-card {
+            transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .option-card:hover:not(.locked-option) {
+            background: rgba(22, 119, 255, 0.16);
+            border-color: rgba(33, 212, 253, 0.65);
+            transform: translateX(6px);
+        }
+
+        .option-card:active:not(.locked-option) {
+            transform: scale(0.99);
+        }
+
+        .locked-option {
+            cursor: default;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(7, 20, 38, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(33, 212, 253, 0.35);
+            border-radius: 99px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(33, 212, 253, 0.65);
+        }
+
+        /* Decorative Geometric HUD lines */
+        .hud-corner {
+            position: relative;
+        }
+        .hud-corner::before, .hud-corner::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-color: #21D4FD;
+            pointer-events: none;
+        }
+        .hud-corner::before {
+            top: -1px;
+            left: -1px;
+            border-top: 2px solid #21D4FD;
+            border-left: 2px solid #21D4FD;
+            border-top-left-radius: 12px;
+        }
+        .hud-corner::after {
+            bottom: -1px;
+            right: -1px;
+            border-bottom: 2px solid #21D4FD;
+            border-right: 2px solid #21D4FD;
+            border-bottom-right-radius: 12px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyberCyan selection:text-deepNavy">
+
+    <!-- Ambient Decorative Background Elements -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full border border-cyberCyan/15 animate-pulse-ring"></div>
+        <div class="absolute top-1/4 right-10 w-72 h-72 rounded-full border border-electricBlue/20 animate-float"></div>
+        <div class="absolute -bottom-24 left-1/3 w-[32rem] h-[32rem] rounded-full bg-electricBlue/5 blur-3xl"></div>
+        <!-- Subtle Code Matrix & Digital Accent Lines -->
+        <div class="hidden lg:block absolute top-24 left-0 w-36 h-[1px] bg-gradient-to-r from-cyberCyan/50 to-transparent"></div>
+        <div class="hidden lg:block absolute bottom-20 right-0 w-48 h-[1px] bg-gradient-to-l from-cyberCyan/50 to-transparent"></div>
+    </div>
+
+    <!-- TOP BAR NAVIGATION -->
+    <header id="globalHeader" class="sticky top-0 z-40 glass-panel border-b border-cyberCyan/20 px-4 sm:px-8 py-3">
+        <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-4">
+            <!-- Brand Identity -->
+            <div onclick="navigateTo('landing')" class="flex items-center gap-3.5 cursor-pointer group">
+                <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-electricBlue to-cyberCyan p-[2px] shadow-lg shadow-cyberCyan/25 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-deepNavy rounded-[10px] flex items-center justify-center">
+                        <!-- Custom SVG Emblem SMK IT Nur Antika -->
+                        <svg class="w-7 h-7 text-cyberCyan" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 3L31 10.5V25.5L18 33L5 25.5V10.5L18 3Z" stroke="currentColor" stroke-width="2.2"/>
+                            <path d="M13 15L9.5 18L13 21" stroke="#F4C76B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M23 15L26.5 18L23 21" stroke="#F4C76B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="19.5" y1="13.5" x2="16.5" y2="22.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-display font-extrabold text-sm sm:text-base md:text-lg tracking-wider text-white">NUR ANTIKA <span class="text-cyberCyan">DIGITAL LEARNING</span></span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-slate-300 font-medium tracking-wide">SMK IT NUR ANTIKA • KODING & KECERDASAN ARTIFISIAL • XII TKJ</p>
+                </div>
+            </div>
+
+            <!-- Center Status Pill -->
+            <div id="headerSessionBadge" class="hidden xl:flex items-center gap-3 px-4 py-1.5 rounded-full bg-deepNavy/80 border border-cyberCyan/30 text-xs font-semibold tracking-wider text-cyberCyan">
+                <span class="w-2 h-2 rounded-full bg-correctGreen animate-ping"></span>
+                <span>MODE PEMBELAJARAN BERSAMA KELAS (PID)</span>
+            </div>
+
+            <!-- Right Utility Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button id="btnHeaderDashboard" onclick="navigateTo('dashboard')" class="hidden px-3.5 sm:px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-xs sm:text-sm font-semibold text-white flex items-center gap-2 transition cursor-pointer">
+                    <i data-lucide="layout-grid" class="w-4 h-4 text-cyberCyan"></i>
+                    <span class="hidden sm:inline">Dashboard</span>
+                </button>
+
+                <button onclick="openResetModal()" class="px-3.5 sm:px-4 py-2.5 rounded-xl bg-wrongRed/15 hover:bg-wrongRed/25 border border-wrongRed/40 text-xs sm:text-sm font-semibold text-wrongRed flex items-center gap-2 transition cursor-pointer" title="Reset Seluruh Progres Latihan">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                    <span class="hidden md:inline">Reset Latihan</span>
+                </button>
+
+                <button id="btnFullscreen" onclick="toggleFullscreen()" class="px-3.5 sm:px-4 py-2.5 rounded-xl bg-electricBlue/20 hover:bg-electricBlue/35 border border-cyberCyan/40 text-xs sm:text-sm font-semibold text-cyberCyan flex items-center gap-2 transition cursor-pointer" title="Mode Layar Penuh PID">
+                    <i id="fullscreenIcon" data-lucide="maximize" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline" id="fullscreenText">Fullscreen</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APPLICATION CONTAINER -->
+    <main class="relative z-10 max-w-[1720px] mx-auto px-4 sm:px-8 py-6 sm:py-8">
+
+        <!-- =====================================================================
+             VIEW 1: LANDING PAGE / HALAMAN PEMBUKA
+             ===================================================================== -->
+        <section id="view-landing" class="view-transition min-h-[calc(100vh-120px)] flex flex-col justify-center">
+            <div class="glass-panel hud-corner rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
+                <!-- Decorative Geometric Circuit Overlay -->
+                <div class="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-cyberCyan/15 via-electricBlue/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Top Badges -->
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="px-4 py-1.5 rounded-full bg-electricBlue/25 border border-electricBlue text-cyberCyan font-bold text-xs sm:text-sm tracking-wider uppercase">
+                                SMK IT NUR ANTIKA
+                            </span>
+                            <span class="px-4 py-1.5 rounded-full bg-goldAccent/20 border border-goldAccent/60 text-goldAccent font-bold text-xs sm:text-sm tracking-wider">
+                                KELAS XII TKJ
+                            </span>
+                            <span class="px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-slate-200 font-semibold text-xs sm:text-sm">
+                                Tahun Pelajaran 2026/2027
+                            </span>
+                        </div>
+
+                        <!-- Main Headlines -->
+                        <div class="space-y-3">
+                            <p class="text-cyberCyan font-mono font-bold tracking-[0.15em] text-xs sm:text-sm uppercase">
+                                MATA PELAJARAN: KODING DAN KECERDASAN ARTIFISIAL (KKA)
+                            </p>
+                            <h1 class="font-display font-extrabold text-3xl sm:text-5xl xl:text-6xl leading-tight tracking-tight text-white">
+                                LATIHAN <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyberCyan via-sky-300 to-electricBlue">PERSIAPAN UJIAN</span>
+                            </h1>
+                            <p class="text-lg sm:text-2xl font-medium text-goldAccent">
+                                Buktikan Kemampuanmu, Siapkan Masa Depanmu!
+                            </p>
+                        </div>
+
+                        <!-- Materi Fokus (2 Kartu Materi) -->
+                        <div class="glass-card-light rounded-2xl p-5 border border-cyberCyan/20 space-y-3">
+                            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-cyberCyan">
+                                <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+                                <span>Materi Pembelajaran & Evaluasi</span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <div class="flex items-start gap-3.5 bg-deepNavy/70 p-4 rounded-xl border border-cyberCyan/25">
+                                    <span class="px-2.5 py-1 rounded-lg bg-electricBlue/30 text-cyberCyan font-mono font-bold shrink-0 text-xs">BAB I</span>
+                                    <div>
+                                        <div class="text-sm sm:text-base font-bold text-white leading-snug">Portofolio Digital Profesional</div>
+                                        <div class="text-xs text-slate-400 mt-1">Konsep, etika, keaslian karya & keamanan data</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3.5 bg-deepNavy/70 p-4 rounded-xl border border-cyberCyan/25">
+                                    <span class="px-2.5 py-1 rounded-lg bg-electricBlue/30 text-cyberCyan font-mono font-bold shrink-0 text-xs">BAB II</span>
+                                    <div>
+                                        <div class="text-sm sm:text-base font-bold text-white leading-snug">Struktur dan Konten Portofolio Digital</div>
+                                        <div class="text-xs text-slate-400 mt-1">Anatomi, deskripsi proyek & desain responsif</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Primary CTA -->
+                        <div class="pt-2 flex flex-wrap items-center gap-4">
+                            <button onclick="navigateTo('dashboard')" class="btn-primary-glow px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-display font-extrabold text-base sm:text-xl text-white tracking-wide flex items-center gap-3.5 cursor-pointer">
+                                <span>MULAI LATIHAN</span>
+                                <i data-lucide="arrow-right-circle" class="w-6 h-6"></i>
+                            </button>
+                            <div class="text-xs sm:text-sm text-slate-300 flex items-center gap-2 px-3">
+                                <i data-lucide="monitor-play" class="w-5 h-5 text-cyberCyan"></i>
+                                <span>Siap digunakan pada Interactive Flat Panel (PID)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Visual: Digital Portfolio, Code, Laptop & Project Documentation Illustration -->
+                    <div class="lg:col-span-5 space-y-5">
+                        <div class="glass-card-light rounded-3xl p-6 sm:p-8 border border-cyberCyan/30 relative flex flex-col items-center text-center overflow-hidden">
+                            <!-- Futuristic Digital Portfolio & Code SVG Illustration -->
+                            <div class="w-full max-w-[300px] mb-4 animate-float">
+                                <svg viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-[0_10px_25px_rgba(33,212,253,0.28)]">
+                                    <!-- Browser / Portfolio Window Frame -->
+                                    <rect x="24" y="16" width="272" height="154" rx="14" fill="#071426" stroke="#21D4FD" stroke-width="2"/>
+                                    <!-- Top Window Bar -->
+                                    <path d="M24 30C24 22.268 30.268 16 38 16H282C289.732 16 296 22.268 296 30V42H24V30Z" fill="#0B1F38"/>
+                                    <circle cx="42" cy="29" r="4" fill="#FF5C70"/>
+                                    <circle cx="56" cy="29" r="4" fill="#F4C76B"/>
+                                    <circle cx="70" cy="29" r="4" fill="#20C997"/>
+                                    <rect x="92" y="24" width="130" height="10" rx="5" fill="rgba(33,212,253,0.18)"/>
+                                    
+                                    <!-- Left Sidebar Profile Card inside Mockup -->
+                                    <rect x="38" y="54" width="76" height="102" rx="8" fill="rgba(22,119,255,0.16)" stroke="rgba(33,212,253,0.35)"/>
+                                    <circle cx="76" cy="78" r="14" fill="#1677FF" stroke="#21D4FD" stroke-width="1.5"/>
+                                    <rect x="52" y="100" width="48" height="6" rx="3" fill="#FFFFFF"/>
+                                    <rect x="58" y="112" width="36" height="5" rx="2.5" fill="#21D4FD"/>
+                                    <rect x="48" y="128" width="56" height="18" rx="5" fill="rgba(244,199,107,0.2)" stroke="#F4C76B" stroke-width="1"/>
+
+                                    <!-- Right Project Documentation & Code Snippets -->
+                                    <rect x="124" y="54" width="158" height="46" rx="8" fill="rgba(11,31,56,0.9)" stroke="rgba(255,255,255,0.15)"/>
+                                    <text x="136" y="73" fill="#21D4FD" font-family="monospace" font-size="10" font-weight="bold">&lt;portfolio-tkj&gt;</text>
+                                    <rect x="136" y="81" width="96" height="5" rx="2.5" fill="#20C997"/>
+                                    <rect x="238" y="81" width="32" height="5" rx="2.5" fill="#F4C76B"/>
+
+                                    <rect x="124" y="108" width="75" height="48" rx="8" fill="rgba(22,119,255,0.2)" stroke="#1677FF"/>
+                                    <path d="M148 132L157 141L175 123" stroke="#20C997" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    
+                                    <rect x="207" y="108" width="75" height="48" rx="8" fill="rgba(33,212,253,0.12)" stroke="#21D4FD"/>
+                                    <circle cx="244" cy="128" r="8" stroke="#F4C76B" stroke-width="2"/>
+                                    <line x1="226" y1="144" x2="262" y2="144" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+
+                                    <!-- Laptop Base Stand -->
+                                    <path d="M8 170H312L298 184H22L8 170Z" fill="url(#laptopBaseGrad)"/>
+                                    <defs>
+                                        <linearGradient id="laptopBaseGrad" x1="8" y1="170" x2="312" y2="184" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#1677FF"/>
+                                            <stop offset="0.5" stop-color="#21D4FD"/>
+                                            <stop offset="1" stop-color="#1677FF"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+
+                            <h2 class="font-display font-bold text-lg sm:text-xl text-white">PORTFOLIO & KKA DIGITAL HUB</h2>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">Simulasi Evaluasi Interaktif Terpadu Guru & Siswa XII TKJ</p>
+
+                            <!-- Stat Cards: 35 PG & 5 Essay -->
+                            <div class="grid grid-cols-2 gap-4 w-full mt-5">
+                                <div class="bg-deepNavy/85 border border-electricBlue/45 rounded-2xl p-4 text-center">
+                                    <div class="font-mono font-extrabold text-3xl sm:text-4xl text-cyberCyan">35</div>
+                                    <div class="text-xs sm:text-sm font-bold text-white mt-1">Pilihan Ganda</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Opsi A – E Interaktif</div>
+                                </div>
+                                <div class="bg-deepNavy/85 border border-goldAccent/45 rounded-2xl p-4 text-center">
+                                    <div class="font-mono font-extrabold text-3xl sm:text-4xl text-goldAccent">05</div>
+                                    <div class="text-xs sm:text-sm font-bold text-white mt-1">Soal Essay</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Uraian & Studi Kasus</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             VIEW 2: DASHBOARD LATIHAN
+             ===================================================================== -->
+        <section id="view-dashboard" class="hidden view-transition space-y-6 sm:space-y-8">
+            <!-- Top Banner -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-cyberCyan/30">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <span class="px-3.5 py-1 rounded-lg bg-electricBlue/30 border border-electricBlue text-cyberCyan font-bold text-xs tracking-wider">KELAS XII TKJ</span>
+                        <span class="px-3.5 py-1 rounded-lg bg-white/10 text-slate-200 font-semibold text-xs">Tahun Pelajaran 2026/2027</span>
+                    </div>
+                    <h1 class="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+                        KODING DAN KECERDASAN ARTIFISIAL
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base">
+                        Dashboard Latihan Persiapan Ujian Semester — BAB I & BAB II Portofolio Digital Profesional.
+                    </p>
+                </div>
+
+                <!-- Overall Progress Pill -->
+                <div class="glass-card-light rounded-2xl p-4 sm:p-5 border border-cyberCyan/25 min-w-[260px] sm:min-w-[330px]">
+                    <div class="flex items-center justify-between text-xs sm:text-sm font-bold mb-2">
+                        <span class="text-slate-300">Progress Pembahasan Soal</span>
+                        <span id="dashProgressText" class="text-cyberCyan font-mono">0 / 35 Selesai (0%)</span>
+                    </div>
+                    <div class="w-full h-3 bg-deepNavy rounded-full overflow-hidden border border-white/10">
+                        <div id="dashProgressBar" class="h-full bg-gradient-to-r from-electricBlue to-cyberCyan transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="mt-2.5 flex items-center justify-between text-xs text-slate-400">
+                        <span>Soal Aktif: <strong id="dashActiveSoal" class="text-white">Nomor 01</strong></span>
+                        <span id="dashScoreSummary" class="text-correctGreen font-semibold">Benar: 0 | Salah: 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Main Sections: Pilihan Ganda & Essay -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+                <!-- PILIHAN GANDA (7 cols) -->
+                <div class="lg:col-span-7 glass-panel hud-corner rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-2 border-cyberCyan/40 relative overflow-hidden">
+                    <div class="absolute -right-12 -top-12 w-48 h-48 bg-electricBlue/15 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="space-y-5">
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="px-4 py-1.5 rounded-xl bg-cyberCyan/20 border border-cyberCyan/50 text-cyberCyan font-display font-extrabold text-xs sm:text-sm tracking-wider">
+                                SESI UTAMA • PILIHAN GANDA
+                            </span>
+                            <span class="font-mono font-bold text-sm text-goldAccent bg-goldAccent/10 border border-goldAccent/30 px-3 py-1 rounded-lg">
+                                TOTAL 35 SOAL
+                            </span>
+                        </div>
+
+                        <div>
+                            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                                Latihan Pilihan Ganda (A–E)
+                            </h2>
+                            <p class="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
+                                Mode pembelajaran bersama di PID dengan alur bertahap: diskusi kelas, pemilihan <strong>Jawaban Kelas</strong>, penguncian jawaban oleh guru, pembukaan kunci, dan pembahasan.
+                            </p>
+                        </div>
+
+                        <!-- Mini Status Grid Preview -->
+                        <div class="bg-deepNavy/75 rounded-2xl p-4 border border-white/10">
+                            <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-300 mb-3">
+                                <span>Status Pembahasan 35 Soal:</span>
+                                <div class="flex items-center gap-3">
+                                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-600"></span> Belum</span>
+                                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-goldAccent"></span> Dikunci</span>
+                                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-correctGreen"></span> Dibahas</span>
+                                </div>
+                            </div>
+                            <div id="dashMiniGrid" class="grid grid-cols-7 sm:grid-cols-10 gap-1.5">
+                                <!-- Populated via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-white/10 flex flex-wrap items-center gap-4">
+                        <button onclick="startQuizFromDashboard()" class="btn-primary-glow flex-1 sm:flex-initial px-7 py-4 rounded-2xl font-display font-extrabold text-base sm:text-lg text-white flex items-center justify-center gap-3 cursor-pointer">
+                            <i data-lucide="play-circle" class="w-6 h-6"></i>
+                            <span id="btnStartPGLabel">MULAI PILIHAN GANDA</span>
+                        </button>
+                        <button onclick="navigateTo('results')" class="px-5 py-4 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 text-sm font-bold text-slate-200 flex items-center gap-2 transition cursor-pointer">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-cyberCyan"></i>
+                            <span>Rekap Hasil Kelas</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ESSAY / URAIAN (5 cols) -->
+                <div class="lg:col-span-5 glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between border border-goldAccent/35 relative overflow-hidden">
+                    <div class="space-y-5">
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="px-4 py-1.5 rounded-xl bg-goldAccent/20 border border-goldAccent/50 text-goldAccent font-display font-extrabold text-xs sm:text-sm tracking-wider">
+                                SESI URAIAN • ANALISIS
+                            </span>
+                            <span class="font-mono font-bold text-sm text-goldAccent bg-goldAccent/10 border border-goldAccent/30 px-3 py-1 rounded-lg">
+                                TOTAL 05 SOAL
+                            </span>
+                        </div>
+
+                        <div>
+                            <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white">
+                                Latihan Essay / Uraian
+                            </h2>
+                            <p class="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
+                                5 soal uraian studi kasus penyusunan portofolio digital, etika keamanan data jaringan, perbandingan CV vs portofolio, serta dokumentasi proyek TKJ.
+                            </p>
+                        </div>
+
+                        <div class="bg-deepNavy/75 rounded-2xl p-4 border border-white/10 space-y-2.5">
+                            <div class="text-xs font-bold uppercase tracking-wider text-goldAccent">Cakupan Pertanyaan Essay:</div>
+                            <ul class="text-xs sm:text-sm text-slate-300 space-y-2">
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-goldAccent shrink-0"></i> Manfaat Portofolio Digital Bagi Siswa XII TKJ</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-goldAccent shrink-0"></i> Lima Bagian Utama Struktur Portofolio</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-goldAccent shrink-0"></i> Etika, Keamanan & Privasi Kredensial</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-goldAccent shrink-0"></i> Studi Kasus Proyek Simulasi Jaringan Lab</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-white/10">
+                        <button onclick="navigateTo('essay')" class="w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-500/25 to-goldAccent/25 hover:from-amber-500/35 hover:to-goldAccent/35 border border-goldAccent/60 font-display font-extrabold text-base sm:text-lg text-goldAccent flex items-center justify-center gap-3 transition cursor-pointer">
+                            <i data-lucide="file-text" class="w-6 h-6"></i>
+                            <span>MENU ESSAY (5 SOAL)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             VIEW 3: SISTEM LATIHAN PILIHAN GANDA (MODE PEMBELAJARAN BERSAMA / PID)
+             ===================================================================== -->
+        <section id="view-quiz" class="hidden view-transition space-y-5">
+            <!-- Top Question Progress & Status Strip -->
+            <div class="glass-panel rounded-2xl p-4 sm:px-6 sm:py-4 flex flex-wrap items-center justify-between gap-4 border border-cyberCyan/25">
+                <div class="flex items-center gap-4">
+                    <div class="px-4 py-2 rounded-xl bg-electricBlue/25 border border-cyberCyan/50 font-mono font-extrabold text-base sm:text-xl text-cyberCyan">
+                        SOAL <span id="quizNumberIndicator">01</span> / 35
+                    </div>
+                    <div id="quizStatusBadge" class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 bg-slate-700/60 text-slate-200 border border-slate-500/40">
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+                        <span>Status: Belum Dibahas</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="flex-1 min-w-[200px] max-w-md">
+                    <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                        <span>Progres Pembahasan Kelas</span>
+                        <span id="quizProgressPercent" class="font-mono text-cyberCyan">0%</span>
+                    </div>
+                    <div class="w-full h-2.5 bg-deepNavy rounded-full overflow-hidden border border-white/10">
+                        <div id="quizProgressBar" class="h-full bg-gradient-to-r from-electricBlue to-cyberCyan transition-all duration-300" style="width: 3%"></div>
+                    </div>
+                </div>
+
+                <!-- Button to Toggle Question Navigator Modal -->
+                <button onclick="toggleNavigatorModal(true)" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-cyberCyan/20 border border-cyberCyan/40 text-xs sm:text-sm font-bold text-white flex items-center gap-2 transition cursor-pointer">
+                    <i data-lucide="grid" class="w-4 h-4 text-cyberCyan"></i>
+                    <span>Panel Nomor (1–35)</span>
+                </button>
+            </div>
+
+            <!-- Main Interactive Question Area -->
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+                <!-- Left / Center: Question & Options (8 cols on XL) -->
+                <div class="xl:col-span-8 space-y-5">
+                    <!-- Question Card -->
+                    <div id="questionCardContainer" class="glass-panel hud-corner rounded-3xl p-6 sm:p-8 lg:p-10 border border-cyberCyan/35">
+                        <div class="flex items-start gap-4 sm:gap-6">
+                            <div id="bigQuestionNum" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-electricBlue to-cyberCyan flex items-center justify-center font-mono font-extrabold text-2xl sm:text-3xl text-deepNavy shrink-0 shadow-lg shadow-cyberCyan/30">
+                                01
+                            </div>
+                            <div class="space-y-2 flex-1">
+                                <span class="text-xs font-mono font-bold uppercase tracking-widest text-cyberCyan">Pertanyaan Diskusi Kelas • KKA XII TKJ</span>
+                                <h2 id="questionText" class="font-display font-bold text-xl sm:text-2xl lg:text-[28px] leading-snug text-white">
+                                    Memuat soal...
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5 Large Touch-Friendly Options (A, B, C, D, E) -->
+                    <div id="optionsContainer" class="space-y-3.5">
+                        <!-- Rendered dynamically via JS -->
+                    </div>
+
+                    <!-- Feedback & Explanation Box (HIDDEN until Guru presses TAMPILKAN JAWABAN BENAR) -->
+                    <div id="explanationBox" class="hidden rounded-3xl p-6 sm:p-8 border-2 transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/15">
+                            <div class="flex items-center gap-3.5">
+                                <div id="feedbackIconWrapper" class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">
+                                    <!-- Icon injected -->
+                                </div>
+                                <div>
+                                    <h3 id="feedbackTitle" class="font-display font-extrabold text-lg sm:text-2xl tracking-wide">
+                                        <!-- HEBAAT! JAWABAN KELAS BENAR / YUK PELAJARI KEMBALI -->
+                                    </h3>
+                                    <p id="feedbackSubtitle" class="text-xs sm:text-sm text-slate-200 mt-0.5"></p>
+                                </div>
+                            </div>
+                            <div class="px-4 py-2 rounded-xl bg-deepNavy/85 border border-correctGreen/50 text-correctGreen font-mono font-bold text-sm sm:text-base shrink-0">
+                                KUNCI: <span id="correctKeyBadge">B</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 space-y-1.5">
+                            <div class="text-xs font-bold uppercase tracking-widest text-cyberCyan flex items-center gap-2">
+                                <i data-lucide="book-open-check" class="w-4 h-4"></i>
+                                <span>Pembahasan Singkat</span>
+                            </div>
+                            <p id="explanationText" class="text-base sm:text-lg text-white leading-relaxed font-medium">
+                                <!-- Pembahasan -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Teacher Control Panel / Kontrol Guru (4 cols on XL) -->
+                <aside class="xl:col-span-4 glass-panel rounded-3xl p-5 sm:p-6 border border-cyberCyan/30 space-y-5 sticky top-24">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3.5">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-cyberCyan/20 border border-cyberCyan/40 flex items-center justify-center text-cyberCyan">
+                                <i data-lucide="sliders" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-extrabold text-base sm:text-lg text-white">KONTROL GURU</h3>
+                                <p class="text-[11px] text-slate-300">Mode Pembelajaran Bersama</p>
+                            </div>
+                        </div>
+                        <span id="stageIndicatorPill" class="px-3 py-1 rounded-lg bg-electricBlue/25 border border-electricBlue text-cyberCyan font-mono font-bold text-xs">
+                            TAHAP 1/5
+                        </span>
+                    </div>
+
+                    <!-- Step-by-Step Pedagogical Guide -->
+                    <div class="bg-deepNavy/75 rounded-2xl p-4 border border-white/10 space-y-2">
+                        <div class="text-xs font-bold text-goldAccent uppercase tracking-wider flex items-center gap-1.5">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            <span>Panduan Alur Kelas:</span>
+                        </div>
+                        <p id="teacherInstructionText" class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                            Tampilkan soal di PID, ajak siswa berdiskusi bersama, lalu sentuh salah satu pilihan (A–E) sebagai <strong>Jawaban Kelas</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Selected Class Answer Preview -->
+                    <div class="flex items-center justify-between bg-deepNavy/60 px-4 py-3 rounded-xl border border-white/10">
+                        <span class="text-xs sm:text-sm font-semibold text-slate-300">Indikator Jawaban Kelas:</span>
+                        <span id="selectedClassAnswerDisplay" class="font-mono font-extrabold text-base sm:text-lg text-slate-400">
+                            Belum Dipilih
+                        </span>
+                    </div>
+
+                    <!-- Primary Pedagogical Action Buttons -->
+                    <div class="space-y-3">
+                        <!-- TAHAP 3: KUNCI JAWABAN KELAS -->
+                        <button id="btnLockAnswer" onclick="lockClassAnswer()" disabled class="w-full py-4 px-5 rounded-2xl font-display font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 transition disabled:opacity-40 disabled:cursor-not-allowed bg-amber-500 hover:bg-amber-400 text-deepNavy shadow-lg shadow-amber-500/25 cursor-pointer">
+                            <i data-lucide="lock" class="w-5 h-5"></i>
+                            <span>KUNCI JAWABAN KELAS</span>
+                        </button>
+
+                        <!-- TAHAP 4: TAMPILKAN JAWABAN BENAR -->
+                        <button id="btnRevealAnswer" onclick="revealCorrectAnswer()" disabled class="w-full py-4 px-5 rounded-2xl font-display font-extrabold text-sm sm:text-base flex items-center justify-center gap-2.5 transition disabled:opacity-40 disabled:cursor-not-allowed bg-correctGreen hover:bg-emerald-400 text-deepNavy shadow-lg shadow-correctGreen/25 cursor-pointer">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                            <span>TAMPILKAN JAWABAN BENAR</span>
+                        </button>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="pt-3 border-t border-white/10 space-y-3">
+                        <div class="grid grid-cols-2 gap-3">
+                            <button id="btnPrevSoal" onclick="prevQuestion()" class="py-3.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-35 disabled:cursor-not-allowed border border-white/15 font-bold text-xs sm:text-sm text-white flex items-center justify-center gap-2 transition cursor-pointer">
+                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                                <span>SEBELUMNYA</span>
+                            </button>
+
+                            <button id="btnNextSoal" onclick="nextQuestion()" class="py-3.5 px-4 rounded-xl bg-electricBlue hover:bg-blue-500 border border-cyberCyan/50 font-bold text-xs sm:text-sm text-white flex items-center justify-center gap-2 shadow-md shadow-electricBlue/30 transition cursor-pointer">
+                                <span id="btnNextSoalText">SOAL BERIKUTNYA</span>
+                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+
+                        <!-- Secondary Teacher Controls: Ulangi Soal & Lewati Soal -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="repeatCurrentQuestion()" class="py-3 px-3.5 rounded-xl bg-deepNavy hover:bg-white/10 border border-white/15 font-semibold text-xs text-slate-200 flex items-center justify-center gap-2 transition cursor-pointer">
+                                <i data-lucide="refresh-cw" class="w-4 h-4 text-goldAccent"></i>
+                                <span>ULANGI SOAL</span>
+                            </button>
+
+                            <button onclick="skipCurrentQuestion()" class="py-3 px-3.5 rounded-xl bg-deepNavy hover:bg-white/10 border border-white/15 font-semibold text-xs text-slate-200 flex items-center justify-center gap-2 transition cursor-pointer">
+                                <i data-lucide="skip-forward" class="w-4 h-4 text-cyberCyan"></i>
+                                <span>LEWATI SOAL</span>
+                            </button>
+                        </div>
+
+                        <button onclick="navigateTo('dashboard')" class="w-full py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-semibold text-xs sm:text-sm text-slate-300 flex items-center justify-center gap-2 transition cursor-pointer">
+                            <i data-lucide="home" class="w-4 h-4 text-cyberCyan"></i>
+                            <span>KEMBALI KE DASHBOARD</span>
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             VIEW 4: HASIL LATIHAN KELAS (REKAPITULASI 35 SOAL)
+             ===================================================================== -->
+        <section id="view-results" class="hidden view-transition space-y-6 sm:space-y-8">
+            <div class="glass-panel hud-corner rounded-3xl p-6 sm:p-10 border border-cyberCyan/35">
+                <div class="text-center max-w-3xl mx-auto space-y-3 mb-8">
+                    <span class="px-4 py-1.5 rounded-full bg-cyberCyan/20 border border-cyberCyan/40 text-cyberCyan font-bold text-xs tracking-widest uppercase">
+                        REKAPITULASI DISKUSI KELAS • XII TKJ
+                    </span>
+                    <h1 class="font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white">
+                        HASIL LATIHAN KELAS
+                    </h1>
+                    <p id="motivationMessage" class="text-base sm:text-xl font-bold text-goldAccent">
+                        HEBAT! TERUS KEMBANGKAN KETERAMPILAN DIGITAL DAN KEMAMPUAN PROFESIONALMU.
+                    </p>
+                    <p class="text-xs sm:text-sm text-slate-400">
+                        *Catatan: Hasil ini merupakan rekap jawaban bersama kelas XII TKJ, bukan nilai individu siswa.
+                    </p>
+                </div>
+
+                <!-- Circular Progress & Statistics Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Circular Accuracy Chart -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center bg-deepNavy/75 rounded-3xl p-8 border border-cyberCyan/25">
+                        <div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center">
+                            <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"/>
+                                <circle id="resultCircleArc" cx="60" cy="60" r="50" fill="none" stroke="url(#cyberGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" class="transition-all duration-1000 ease-out"/>
+                                <defs>
+                                    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#1677FF"/>
+                                        <stop offset="50%" stop-color="#21D4FD"/>
+                                        <stop offset="100%" stop-color="#20C997"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                                <span id="resultPercentText" class="font-mono font-extrabold text-4xl sm:text-5xl text-white">0%</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-cyberCyan mt-1">Ketepatan Jawaban</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <span id="resultDiscussedCount" class="text-sm font-semibold text-slate-300">0 dari 35 Soal Telah Dibahas</span>
+                        </div>
+                    </div>
+
+                    <!-- Stat Breakdown Cards -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-deepNavy/80 rounded-2xl p-5 border border-cyberCyan/30">
+                                <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Total Soal</div>
+                                <div class="font-mono font-extrabold text-3xl sm:text-4xl text-white mt-2">35</div>
+                                <div class="text-xs text-cyberCyan mt-1">Pilihan Ganda</div>
+                            </div>
+                            <div class="bg-deepNavy/80 rounded-2xl p-5 border border-correctGreen/40">
+                                <div class="text-xs font-bold uppercase tracking-wider text-correctGreen">Jawaban Benar</div>
+                                <div id="resultCorrectCount" class="font-mono font-extrabold text-3xl sm:text-4xl text-correctGreen mt-2">0</div>
+                                <div class="text-xs text-slate-300 mt-1">Sesuai Kunci Jawaban</div>
+                            </div>
+                            <div class="bg-deepNavy/80 rounded-2xl p-5 border border-wrongRed/40">
+                                <div class="text-xs font-bold uppercase tracking-wider text-wrongRed">Jawaban Salah</div>
+                                <div id="resultWrongCount" class="font-mono font-extrabold text-3xl sm:text-4xl text-wrongRed mt-2">0</div>
+                                <div class="text-xs text-slate-300 mt-1">Perlu Pendalaman</div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar Pembahasan -->
+                        <div class="bg-deepNavy/75 rounded-2xl p-5 border border-white/10 space-y-3">
+                            <div class="flex justify-between items-center text-sm font-bold">
+                                <span class="text-slate-200">Progress Pembahasan Soal</span>
+                                <span id="resultProgressPercent" class="font-mono text-goldAccent">0%</span>
+                            </div>
+                            <div class="w-full h-3.5 bg-darkBlue rounded-full overflow-hidden border border-white/10">
+                                <div id="resultProgressBar" class="h-full bg-gradient-to-r from-goldAccent to-correctGreen transition-all duration-700" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap items-center gap-4 pt-2">
+                            <button onclick="navigateTo('essay')" class="btn-primary-glow px-7 py-4 rounded-2xl font-display font-extrabold text-sm sm:text-base text-white flex items-center gap-3 cursor-pointer">
+                                <i data-lucide="file-text" class="w-5 h-5"></i>
+                                <span>LANJUT KE MENU ESSAY (5 SOAL)</span>
+                            </button>
+
+                            <button onclick="navigateTo('quiz')" class="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 font-bold text-sm sm:text-base text-white flex items-center gap-2 transition cursor-pointer">
+                                <i data-lucide="arrow-left" class="w-5 h-5 text-cyberCyan"></i>
+                                <span>Tinjau Soal PG</span>
+                            </button>
+
+                            <button onclick="navigateTo('dashboard')" class="px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/10 font-bold text-sm sm:text-base text-slate-300 flex items-center gap-2 transition cursor-pointer">
+                                <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                                <span>Dashboard</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================================
+             VIEW 5: MENU ESSAY / URAIAN (5 SOAL)
+             ===================================================================== -->
+        <section id="view-essay" class="hidden view-transition space-y-6">
+            <!-- Top Strip Essay -->
+            <div class="glass-panel rounded-2xl p-4 sm:px-6 sm:py-4 flex flex-wrap items-center justify-between gap-4 border border-goldAccent/35">
+                <div class="flex items-center gap-4">
+                    <div class="px-4 py-2 rounded-xl bg-goldAccent/20 border border-goldAccent/60 font-mono font-extrabold text-base sm:text-xl text-goldAccent">
+                        ESSAY <span id="essayNumberIndicator">01</span> / 05
+                    </div>
+                    <span class="px-3.5 py-1.5 rounded-full bg-white/10 text-xs sm:text-sm font-semibold text-slate-200">
+                        Diskusi Uraian Bersama Kelas (Non-Otomatis)
+                    </span>
+                </div>
+
+                <!-- Essay Step Pills -->
+                <div class="flex items-center gap-2" id="essayStepPills">
+                    <!-- Rendered via JS -->
+                </div>
+
+                <button onclick="navigateTo('dashboard')" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs sm:text-sm font-bold text-white flex items-center gap-2 transition cursor-pointer">
+                    <i data-lucide="layout-grid" class="w-4 h-4 text-cyberCyan"></i>
+                    <span>Kembali ke Dashboard</span>
+                </button>
+            </div>
+
+            <!-- Main Essay Card -->
+            <div class="glass-panel hud-corner rounded-3xl p-6 sm:p-10 border border-goldAccent/35 space-y-6">
+                <div class="flex items-start gap-4 sm:gap-6">
+                    <div id="essayBigNum" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-goldAccent flex items-center justify-center font-mono font-extrabold text-2xl sm:text-3xl text-deepNavy shrink-0 shadow-lg shadow-goldAccent/25">
+                        01
+                    </div>
+                    <div class="space-y-2 flex-1">
+                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-goldAccent">Pertanyaan Essay • KKA Kelas XII TKJ</span>
+                        <h2 id="essayQuestionText" class="font-display font-bold text-xl sm:text-2xl lg:text-[28px] leading-snug text-white">
+                            Memuat pertanyaan essay...
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Discussion / Notes Area for Class / Teacher on PID -->
+                <div class="space-y-2.5 pt-2">
+                    <div class="flex items-center justify-between">
+                        <label for="essayDiscussionInput" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-cyberCyan flex items-center gap-2">
+                            <i data-lucide="edit-3" class="w-4 h-4"></i>
+                            <span>Area Diskusi & Poin Jawaban Siswa (PID Board)</span>
+                        </label>
+                        <button onclick="clearCurrentEssayNote()" class="text-xs text-slate-400 hover:text-wrongRed transition cursor-pointer">
+                            Bersihkan Catatan
+                        </button>
+                    </div>
+                    <textarea id="essayDiscussionInput" oninput="saveEssayNote(this.value)" rows="6" placeholder="Tuliskan poin-poin hasil diskusi kelas bersama siswa pada layar PID..." class="w-full rounded-2xl bg-deepNavy/85 border border-cyberCyan/30 focus:border-cyberCyan focus:outline-none p-5 text-base sm:text-lg text-white placeholder-slate-500 leading-relaxed resize-y"></textarea>
+                </div>
+
+                <!-- Navigation Footer -->
+                <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                    <button id="btnPrevEssay" onclick="prevEssay()" class="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/20 disabled:opacity-35 disabled:cursor-not-allowed border border-white/15 font-bold text-sm sm:text-base text-white flex items-center gap-2.5 transition cursor-pointer">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        <span>SEBELUMNYA</span>
+                    </button>
+
+                    <div class="text-xs sm:text-sm text-slate-300 font-medium text-center">
+                        Essay tidak dinilai otomatis. Guru membahas dan menyimpulkan jawaban bersama siswa.
+                    </div>
+
+                    <button id="btnNextEssay" onclick="nextEssay()" class="btn-primary-glow px-7 py-4 rounded-2xl font-display font-extrabold text-sm sm:text-base text-white flex items-center gap-2.5 cursor-pointer">
+                        <span id="btnNextEssayText">BERIKUTNYA</span>
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================================
+         MODAL: PANEL NAVIGASI NOMOR SOAL (1 - 35)
+         ===================================================================== -->
+    <div id="navigatorModal" class="hidden fixed inset-0 z-50 bg-deepNavy/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl max-w-4xl w-full p-6 sm:p-8 border border-cyberCyan/40 space-y-6 view-transition">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                    <h3 class="font-display font-extrabold text-xl sm:text-2xl text-white">PANEL NAVIGASI NOMOR SOAL (1–35)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-0.5">Sentuh nomor soal untuk berpindah secara langsung</p>
+                </div>
+                <button onclick="toggleNavigatorModal(false)" class="w-11 h-11 rounded-xl bg-white/10 hover:bg-wrongRed/25 hover:text-wrongRed flex items-center justify-center text-white transition cursor-pointer">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Legend -->
+            <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm font-semibold">
+                <span class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-slate-700 border border-slate-500"></span> Belum Dibahas</span>
+                <span class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-electricBlue border border-cyberCyan"></span> Sedang Dibahas</span>
+                <span class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-amber-500/30 border border-amber-400"></span> Jawaban Dikunci</span>
+                <span class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-correctGreen/30 border border-correctGreen"></span> Sudah Dibahas (Benar)</span>
+                <span class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-wrongRed/30 border border-wrongRed"></span> Sudah Dibahas (Salah)</span>
+            </div>
+
+            <!-- 35 Buttons Grid -->
+            <div id="modalNumberGrid" class="grid grid-cols-5 sm:grid-cols-7 gap-2.5 sm:gap-3 max-h-[55vh] overflow-y-auto p-1">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL: KONFIRMASI RESET LATIHAN (Custom Modal - No window.confirm)
+         ===================================================================== -->
+    <div id="resetModal" class="hidden fixed inset-0 z-50 bg-deepNavy/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-panel rounded-3xl max-w-md w-full p-6 sm:p-8 border border-wrongRed/50 text-center space-y-5 view-transition">
+            <div class="w-16 h-16 rounded-2xl bg-wrongRed/20 border border-wrongRed/50 text-wrongRed flex items-center justify-center mx-auto">
+                <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="font-display font-extrabold text-xl sm:text-2xl text-white">RESET SELURUH LATIHAN?</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Seluruh jawaban kelas, status pembahasan 35 soal PG, dan catatan diskusi essay KKA XII TKJ akan di-reset untuk sesi kelas baru.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <button onclick="closeResetModal()" class="py-3.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 font-bold text-sm text-white transition cursor-pointer">
+                    BATAL
+                </button>
+                <button onclick="executeResetPractice()" class="py-3.5 px-4 rounded-xl bg-wrongRed hover:bg-red-500 font-extrabold text-sm text-white shadow-lg shadow-wrongRed/30 transition cursor-pointer">
+                    YA, RESET LATIHAN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         TOAST NOTIFICATION
+         ===================================================================== -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300">
+        <div class="glass-panel px-5 py-3.5 rounded-2xl border border-cyberCyan/50 shadow-2xl flex items-center gap-3 text-sm font-bold text-white">
+            <i data-lucide="sparkles" class="w-5 h-5 text-cyberCyan"></i>
+            <span id="toastMessage">Notifikasi</span>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT APPLICATION LOGIC & BANK SOAL KKA XII TKJ
+         ===================================================================== -->
+    <script>
+        // =====================================================================
+        // 1. BANK SOAL PILIHAN GANDA (35 SOAL PERSIS & SESUAI KUNCI)
+        // =====================================================================
+        const multipleChoiceQuestions = [
+            {
+                number: 1,
+                question: "Portofolio adalah kumpulan karya atau bukti kemampuan yang disusun untuk menunjukkan ....",
+                options: {
+                    A: "identitas keluarga dan alamat rumah",
+                    B: "pengalaman, keterampilan, proses, dan pencapaian",
+                    C: "daftar seluruh mata pelajaran",
+                    D: "jadwal kegiatan harian",
+                    E: "data akun pribadi"
+                },
+                correct: "B",
+                explanation: "Portofolio merupakan kumpulan karya atau bukti kemampuan yang menunjukkan pengalaman, keterampilan, proses, dan pencapaian seseorang."
+            },
+            {
+                number: 2,
+                question: "Portofolio digital merupakan portofolio yang disajikan menggunakan ....",
+                options: {
+                    A: "buku tulis saja",
+                    B: "papan pengumuman saja",
+                    C: "surat pribadi",
+                    D: "media atau platform digital",
+                    E: "dokumen cetak tanpa media digital"
+                },
+                correct: "D",
+                explanation: "Portofolio digital disajikan melalui media atau platform digital seperti website, PDF, presentasi, dan repositori proyek."
+            },
+            {
+                number: 3,
+                question: "Makna profesional dalam portofolio digital adalah informasi disampaikan secara ....",
+                options: {
+                    A: "panjang dan penuh dekorasi",
+                    B: "rahasia dan tidak lengkap",
+                    C: "sebanyak mungkin tanpa seleksi",
+                    D: "menarik meskipun tidak sesuai kenyataan",
+                    E: "jelas, jujur, sesuai konteks, dan bertanggung jawab"
+                },
+                correct: "E",
+                explanation: "Profesional berarti informasi disampaikan secara jelas, jujur, sesuai konteks, dan memperhatikan kualitas serta etika."
+            },
+            {
+                number: 4,
+                question: "Salah satu manfaat portofolio digital bagi peserta didik TKJ adalah ....",
+                options: {
+                    A: "menggantikan seluruh kegiatan praktik",
+                    B: "menyembunyikan hasil pekerjaan",
+                    C: "menghapus kebutuhan dokumentasi",
+                    D: "menunjukkan keterampilan melalui bukti karya nyata",
+                    E: "menampilkan data pribadi sebanyak-banyaknya"
+                },
+                correct: "D",
+                explanation: "Portofolio membantu peserta didik menunjukkan kemampuan melalui bukti karya nyata yang pernah dikerjakan."
+            },
+            {
+                number: 5,
+                question: "Perbedaan utama CV dan portofolio adalah ....",
+                options: {
+                    A: "CV berisi bukti visual, portofolio berisi identitas saja",
+                    B: "keduanya selalu memiliki isi yang sama",
+                    C: "CV merangkum identitas dan pengalaman, portofolio menunjukkan bukti karya",
+                    D: "portofolio hanya berisi alamat",
+                    E: "CV hanya digunakan oleh teknisi"
+                },
+                correct: "C",
+                explanation: "CV menjelaskan identitas, pendidikan, pengalaman, dan keterampilan. Portofolio memberikan bukti visual atau dokumentasi kemampuan tersebut."
+            },
+            {
+                number: 6,
+                question: "Karya yang dipilih untuk portofolio sebaiknya ....",
+                options: {
+                    A: "sebanyak mungkin tanpa diperiksa",
+                    B: "hanya karya milik orang lain",
+                    C: "dipilih berdasarkan ukuran file",
+                    D: "tidak perlu memiliki dokumentasi",
+                    E: "relevan dengan tujuan dan bidang yang dituju"
+                },
+                correct: "E",
+                explanation: "Karya yang dipilih harus relevan dengan tujuan dan bidang yang ingin ditunjukkan. Kualitas lebih penting daripada jumlah."
+            },
+            {
+                number: 7,
+                question: "Karakteristik portofolio yang autentik dan jujur ditunjukkan dengan ....",
+                options: {
+                    A: "mengaku sebagai pembuat tunggal untuk semua proyek tim",
+                    B: "menampilkan kemampuan sesuai kenyataan",
+                    C: "mengubah hasil agar terlihat sempurna",
+                    D: "menghilangkan peran anggota tim",
+                    E: "mencantumkan sertifikat yang tidak dimiliki"
+                },
+                correct: "B",
+                explanation: "Portofolio autentik menampilkan karya, kontribusi, kemampuan, dan pencapaian sesuai kenyataan."
+            },
+            {
+                number: 8,
+                question: "Saat memublikasikan dokumentasi konfigurasi jaringan, informasi yang harus disamarkan adalah ....",
+                options: {
+                    A: "judul proyek",
+                    B: "foto perangkat umum",
+                    C: "nama aplikasi simulasi",
+                    D: "tujuan pembelajaran",
+                    E: "kredensial akun dan informasi jaringan internal yang rahasia"
+                },
+                correct: "E",
+                explanation: "Informasi sensitif seperti kata sandi, kredensial, data pelanggan, dan konfigurasi internal harus disamarkan sebelum dipublikasikan."
+            },
+            {
+                number: 9,
+                question: "Portofolio untuk melamar pekerjaan teknisi jaringan sebaiknya menonjolkan ....",
+                options: {
+                    A: "resep makanan",
+                    B: "koleksi lagu",
+                    C: "dokumentasi konfigurasi jaringan dan troubleshooting",
+                    D: "riwayat perjalanan pribadi",
+                    E: "daftar film favorit"
+                },
+                correct: "C",
+                explanation: "Portofolio teknisi jaringan sebaiknya menampilkan karya yang relevan seperti konfigurasi jaringan, troubleshooting, dan penggunaan perangkat jaringan."
+            },
+            {
+                number: 10,
+                question: "Jika proyek dibuat bersama tim, pemilik portofolio perlu ....",
+                options: {
+                    A: "mengklaim seluruh pekerjaan sebagai miliknya",
+                    B: "menghapus nama anggota lain dari dokumentasi",
+                    C: "tidak menampilkan proyek tersebut",
+                    D: "menjelaskan peran dan kontribusinya secara jujur",
+                    E: "menyalin deskripsi dari proyek lain"
+                },
+                correct: "D",
+                explanation: "Pemilik portofolio perlu menjelaskan kontribusi pribadi dan pekerjaan tim secara jujur."
+            },
+            {
+                number: 11,
+                question: "Bagian portofolio yang berisi perkenalan, latar belakang pendidikan, dan minat profesional disebut ....",
+                options: {
+                    A: "Galeri Karya",
+                    B: "Kontak Profesional",
+                    C: "Detail Proyek",
+                    D: "Sertifikat",
+                    E: "Profil Singkat (About Me)"
+                },
+                correct: "E",
+                explanation: "Profil Singkat atau About Me memuat perkenalan, latar belakang pendidikan, minat profesional, dan fokus keterampilan."
+            },
+            {
+                number: 12,
+                question: "Bagian Skills pada portofolio berfungsi untuk menampilkan ....",
+                options: {
+                    A: "alamat rumah lengkap",
+                    B: "kemampuan teknis dan nonteknis yang benar-benar dikuasai",
+                    C: "semua kata sandi akun",
+                    D: "daftar karya orang lain",
+                    E: "jadwal libur sekolah"
+                },
+                correct: "B",
+                explanation: "Skills menampilkan kemampuan teknis dan nonteknis yang benar-benar dikuasai oleh pemilik portofolio."
+            },
+            {
+                number: 13,
+                question: "Bagian Detail Proyek sebaiknya menjelaskan ....",
+                options: {
+                    A: "hanya nama pemilik portofolio",
+                    B: "hanya warna desain",
+                    C: "kontak seluruh teman",
+                    D: "latar belakang, tujuan, proses, teknologi, peran, tantangan, dan hasil",
+                    E: "daftar perangkat yang tidak digunakan"
+                },
+                correct: "D",
+                explanation: "Detail proyek menjelaskan latar belakang, tujuan, proses, teknologi, peran, tantangan, solusi, dan hasil pekerjaan."
+            },
+            {
+                number: 14,
+                question: "Bukti karya dalam portofolio dapat berupa ....",
+                options: {
+                    A: "kata sandi dan token akses",
+                    B: "nomor identitas pribadi",
+                    C: "foto proses, tangkapan layar, diagram, video, atau tautan",
+                    D: "data pelanggan tanpa izin",
+                    E: "informasi rahasia perusahaan"
+                },
+                correct: "C",
+                explanation: "Bukti karya dapat berupa foto proses, screenshot, diagram, video demonstrasi, website, atau repositori kode yang aman dibagikan."
+            },
+            {
+                number: 15,
+                question: "Tujuan memberikan keterangan pada gambar atau tangkapan layar adalah ....",
+                options: {
+                    A: "membuat halaman lebih penuh",
+                    B: "menutupi kualitas gambar",
+                    C: "mengganti deskripsi proyek seluruhnya",
+                    D: "mengurangi informasi proyek",
+                    E: "membantu pembaca memahami bukti yang ditampilkan"
+                },
+                correct: "E",
+                explanation: "Keterangan gambar membantu pembaca memahami isi dan konteks bukti pekerjaan."
+            },
+            {
+                number: 16,
+                question: "Media portofolio yang cocok untuk menampilkan proyek pemrograman beserta dokumentasi kode adalah ....",
+                options: {
+                    A: "kartu identitas",
+                    B: "surat undangan",
+                    C: "buku agenda",
+                    D: "repositori kode",
+                    E: "papan tulis"
+                },
+                correct: "D",
+                explanation: "Repositori kode merupakan tempat penyimpanan dan pengelolaan berkas proyek pemrograman."
+            },
+            {
+                number: 17,
+                question: "Prinsip desain tampilan portofolio yang membuat pengguna mudah berpindah antarbagian adalah ....",
+                options: {
+                    A: "kesederhanaan",
+                    B: "responsif",
+                    C: "warna dekoratif",
+                    D: "galeri",
+                    E: "navigasi yang jelas"
+                },
+                correct: "E",
+                explanation: "Navigasi yang jelas membantu pengunjung menemukan bagian dan berpindah antarhalaman dengan mudah."
+            },
+            {
+                number: 18,
+                question: "Kemampuan tampilan website menyesuaikan ukuran layar komputer maupun ponsel disebut ....",
+                options: {
+                    A: "autentik",
+                    B: "kredensial",
+                    C: "repositori",
+                    D: "hierarki",
+                    E: "responsif"
+                },
+                correct: "E",
+                explanation: "Responsif adalah kemampuan tampilan menyesuaikan ukuran layar perangkat yang berbeda."
+            },
+            {
+                number: 19,
+                question: "Salah satu tindakan menjaga keamanan portofolio digital adalah ....",
+                options: {
+                    A: "mengunggah token akses agar mudah diperiksa",
+                    B: "menampilkan alamat rumah",
+                    C: "membagikan kata sandi kepada pembaca",
+                    D: "menghapus kredensial dan data pengguna sebelum mengunggah proyek",
+                    E: "membuka semua dokumen rahasia untuk publik"
+                },
+                correct: "D",
+                explanation: "Kredensial, token akses, data pengguna, dan informasi rahasia perlu dihapus atau disamarkan sebelum proyek dipublikasikan."
+            },
+            {
+                number: 20,
+                question: "Portofolio perlu diperbarui secara berkala agar ....",
+                options: {
+                    A: "seluruh karya lama selalu ditampilkan",
+                    B: "jumlah halaman terus bertambah",
+                    C: "tautan lama tidak perlu diperiksa",
+                    D: "profil tidak berubah selamanya",
+                    E: "informasi dan karya tetap benar, relevan, dan mudah diakses"
+                },
+                correct: "E",
+                explanation: "Portofolio perlu diperbarui agar informasi tetap benar, karya tetap relevan, dan seluruh tautan dapat diakses."
+            },
+            {
+                number: 21,
+                question: "Sebelum menyusun portofolio digital, langkah pertama yang perlu dilakukan adalah ....",
+                options: {
+                    A: "langsung memilih warna desain",
+                    B: "menentukan tujuan portofolio dan target pembacanya",
+                    C: "mengunggah seluruh karya tanpa seleksi",
+                    D: "membuat sebanyak mungkin halaman",
+                    E: "membagikan tautan kepada semua orang"
+                },
+                correct: "B",
+                explanation: "Tujuan dan target pembaca menentukan pemilihan karya, urutan informasi, dan gaya penyajian portofolio."
+            },
+            {
+                number: 22,
+                question: "Portofolio yang ditujukan untuk posisi web developer sebaiknya lebih menonjolkan ....",
+                options: {
+                    A: "dokumentasi perakitan komputer saja",
+                    B: "catatan kegiatan pribadi",
+                    C: "website, kode program, desain antarmuka, dan dokumentasi aplikasi",
+                    D: "daftar mata pelajaran sekolah",
+                    E: "foto kegiatan tanpa penjelasan"
+                },
+                correct: "C",
+                explanation: "Karya yang ditampilkan harus sesuai dengan bidang yang dituju. Untuk web developer, karya website dan aplikasi lebih relevan."
+            },
+            {
+                number: 23,
+                question: "Mengapa jumlah karya yang banyak tidak selalu membuat portofolio lebih baik?",
+                options: {
+                    A: "Karena semua karya harus disembunyikan",
+                    B: "Karena portofolio tidak boleh memiliki gambar",
+                    C: "Karena kualitas dan relevansi karya lebih penting daripada jumlahnya",
+                    D: "Karena portofolio hanya boleh berisi satu karya",
+                    E: "Karena karya lama tidak boleh ditampilkan"
+                },
+                correct: "C",
+                explanation: "Portofolio sebaiknya berisi karya terbaik dan relevan. Penjelasan yang jelas lebih penting daripada sekadar banyaknya karya."
+            },
+            {
+                number: 24,
+                question: "Dalam proyek kelompok, penjelasan mengenai bagian pekerjaan yang dilakukan sendiri bertujuan untuk ....",
+                options: {
+                    A: "menunjukkan kontribusi pribadi secara jujur",
+                    B: "menghilangkan seluruh kontribusi anggota tim",
+                    C: "mengklaim seluruh hasil kelompok",
+                    D: "menyembunyikan proses pengerjaan",
+                    E: "mengganti dokumentasi proyek"
+                },
+                correct: "A",
+                explanation: "Pemilik portofolio harus menjelaskan peran dan kontribusinya agar pembaca mengetahui pekerjaan yang benar-benar dilakukan."
+            },
+            {
+                number: 25,
+                question: "Jika menggunakan gambar, kode, atau aset milik pihak lain dalam portofolio, pemilik portofolio harus ....",
+                options: {
+                    A: "menghapus identitas pencipta",
+                    B: "mengaku sebagai pembuat seluruh aset",
+                    C: "memperhatikan izin dan ketentuan lisensi",
+                    D: "mengubah sedikit gambar agar dianggap milik sendiri",
+                    E: "mengunggah tanpa memperhatikan hak cipta"
+                },
+                correct: "C",
+                explanation: "Penggunaan aset pihak lain harus memperhatikan hak cipta, izin, dan ketentuan lisensi."
+            },
+            {
+                number: 26,
+                question: "Bagian portofolio yang berisi pilihan karya terbaik dalam bentuk gambar, tangkapan layar, video, diagram, dokumen, atau tautan disebut ....",
+                options: {
+                    A: "Profil Singkat",
+                    B: "Kontak Profesional",
+                    C: "Sertifikat",
+                    D: "Galeri atau Daftar Karya",
+                    E: "Halaman Sampul"
+                },
+                correct: "D",
+                explanation: "Galeri atau Daftar Karya digunakan untuk menampilkan pilihan karya terbaik pemilik portofolio."
+            },
+            {
+                number: 27,
+                question: "Informasi waktu pengerjaan, latar belakang masalah, tujuan, peran, teknologi, proses, dan hasil termasuk dalam ....",
+                options: {
+                    A: "deskripsi proyek",
+                    B: "halaman kontak",
+                    C: "profil singkat",
+                    D: "daftar sertifikat",
+                    E: "slogan pribadi"
+                },
+                correct: "A",
+                explanation: "Deskripsi proyek menjelaskan karya secara ringkas dan spesifik agar pembaca memahami tujuan serta proses pembuatannya."
+            },
+            {
+                number: 28,
+                question: "Pada contoh proyek Simulasi Jaringan Laboratorium Komputer, salah satu tahapan proses yang dilakukan adalah ....",
+                options: {
+                    A: "membuat poster promosi",
+                    B: "mengatur alamat IP dan menguji konektivitas",
+                    C: "menyusun daftar sertifikat",
+                    D: "membuat desain kemasan produk",
+                    E: "menyusun laporan keuangan"
+                },
+                correct: "B",
+                explanation: "Contoh proyek dalam modul mencakup rancangan topologi, menghubungkan perangkat, mengatur alamat IP, dan menguji konektivitas."
+            },
+            {
+                number: 29,
+                question: "Salah satu prinsip desain tampilan portofolio yang menghindari dekorasi berlebihan agar perhatian tetap tertuju pada karya adalah ....",
+                options: {
+                    A: "hierarki informasi",
+                    B: "navigasi",
+                    C: "kesederhanaan",
+                    D: "responsif",
+                    E: "dokumentasi"
+                },
+                correct: "C",
+                explanation: "Kesederhanaan berarti menghindari dekorasi berlebihan yang dapat mengalihkan perhatian dari karya."
+            },
+            {
+                number: 30,
+                question: "Pada portofolio digital, menampilkan nama, bidang keahlian, karya utama, dan informasi penting secara teratur merupakan penerapan prinsip ....",
+                options: {
+                    A: "kredensial",
+                    B: "repositori",
+                    C: "hak cipta",
+                    D: "hierarki informasi",
+                    E: "troubleshooting"
+                },
+                correct: "D",
+                explanation: "Hierarki informasi mengatur susunan informasi berdasarkan tingkat kepentingannya agar mudah dipahami."
+            },
+            {
+                number: 31,
+                question: "Mengapa tautan dan berkas dalam portofolio perlu diperiksa secara berkala?",
+                options: {
+                    A: "Agar jumlah halaman semakin banyak",
+                    B: "Agar semua karya lama tetap dipertahankan",
+                    C: "Agar tautan tidak perlu dibuka",
+                    D: "Agar informasi profil tidak berubah",
+                    E: "Agar seluruh materi tetap dapat diakses oleh pihak yang dituju"
+                },
+                correct: "E",
+                explanation: "Portofolio yang baik harus mudah diakses. Tautan dan berkas perlu dipastikan berfungsi."
+            },
+            {
+                number: 32,
+                question: "Pada proyek teknologi, informasi yang harus diperiksa sebelum gambar atau dokumen diunggah adalah ....",
+                options: {
+                    A: "warna latar halaman",
+                    B: "kata sandi, token akses, data pengguna, dan informasi jaringan internal",
+                    C: "ukuran judul portofolio",
+                    D: "jenis huruf pada halaman sampul",
+                    E: "jumlah gambar dalam galeri"
+                },
+                correct: "B",
+                explanation: "Informasi sensitif harus dihapus atau disamarkan agar tidak disalahgunakan."
+            },
+            {
+                number: 33,
+                question: "Salah satu hal yang perlu dilakukan ketika memperbarui portofolio adalah ....",
+                options: {
+                    A: "memeriksa ejaan, tata letak, dan konsistensi tampilan",
+                    B: "menambahkan semua karya tanpa seleksi",
+                    C: "mengabaikan masukan orang lain",
+                    D: "membiarkan tautan yang rusak",
+                    E: "menampilkan seluruh data pribadi"
+                },
+                correct: "A",
+                explanation: "Evaluasi portofolio mencakup pemeriksaan ejaan, tata letak, konsistensi, relevansi karya, dan keamanan."
+            },
+            {
+                number: 34,
+                question: "Jika portofolio dibuat dalam bentuk website, aspek desain yang memastikan tampilannya menyesuaikan komputer maupun ponsel adalah ....",
+                options: {
+                    A: "autentik",
+                    B: "keterbacaan",
+                    C: "responsif",
+                    D: "hak cipta",
+                    E: "deskripsi proyek"
+                },
+                correct: "C",
+                explanation: "Prinsip responsif memastikan tampilan website dapat menyesuaikan ukuran layar perangkat."
+            },
+            {
+                number: 35,
+                question: "Urutan langkah menyusun portofolio digital yang tepat setelah memilih karya terbaik dan memastikan keasliannya adalah ....",
+                options: {
+                    A: "langsung membagikan tautan tanpa pemeriksaan",
+                    B: "menghapus seluruh dokumentasi proyek",
+                    C: "menampilkan data pribadi agar mudah ditemukan",
+                    D: "menyusun struktur, menulis deskripsi proyek, memilih media, mengatur tampilan, dan memeriksa keamanan",
+                    E: "mengganti seluruh karya dengan gambar dekoratif"
+                },
+                correct: "D",
+                explanation: "Setelah memilih karya, portofolio disusun melalui struktur, deskripsi proyek, pemilihan media, pengaturan tampilan, pemeriksaan keamanan, dan publikasi."
+            }
+        ];
+
+        // =====================================================================
+        // 2. BANK SOAL ESSAY (5 SOAL LENGKAP)
+        // =====================================================================
+        const essayQuestions = [
+            {
+                number: 1,
+                question: "Jelaskan pengertian portofolio digital profesional serta tiga tujuan atau manfaatnya bagi peserta didik kelas XII TKJ."
+            },
+            {
+                number: 2,
+                question: "Sebutkan dan jelaskan minimal lima bagian utama dalam struktur portofolio digital."
+            },
+            {
+                number: 3,
+                question: "Jelaskan langkah-langkah menyusun portofolio digital dari awal. Sertakan pula tiga hal yang harus diperhatikan terkait etika, keamanan, atau privasi."
+            },
+            {
+                number: 4,
+                question: "Jelaskan perbedaan CV dan portofolio. Mengapa keduanya dapat saling melengkapi ketika seseorang memperkenalkan kemampuan dan pengalaman profesionalnya?"
+            },
+            {
+                number: 5,
+                question: "Seorang siswa TKJ membuat proyek Simulasi Jaringan Laboratorium Komputer. Jelaskan informasi apa saja yang perlu dimasukkan dalam deskripsi proyek agar pembaca memahami tujuan, proses, teknologi, peran, dan hasil pekerjaan tersebut."
+            }
+        ];
+
+        // =====================================================================
+        // 3. STATE MANAGEMENT
+        // =====================================================================
+        const STORAGE_KEY = 'nur_antika_mpi_kka_xiitkj_2026_v1';
+
+        let appState = {
+            currentView: 'landing', // 'landing' | 'dashboard' | 'quiz' | 'results' | 'essay'
+            currentQuestionIndex: 0, // 0 to 34
+            currentEssayIndex: 0,    // 0 to 4
+            pgStates: Array.from({ length: 35 }, () => ({
+                selected: null,
+                locked: false,
+                revealed: false
+            })),
+            essayNotes: Array.from({ length: 5 }, () => "")
+        };
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (parsed && Array.isArray(parsed.pgStates) && parsed.pgStates.length === 35) {
+                        appState = {
+                            ...appState,
+                            ...parsed
+                        };
+                    }
+                }
+            } catch (e) {
+                console.warn("Gagal memuat state tersimpan:", e);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (e) {
+                console.warn("Gagal menyimpan state:", e);
+            }
+        }
+
+        // =====================================================================
+        // 4. NAVIGATION & VIEW CONTROLLER
+        // =====================================================================
+        function navigateTo(viewName) {
+            appState.currentView = viewName;
+            saveState();
+
+            const views = ['landing', 'dashboard', 'quiz', 'results', 'essay'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) {
+                    if (v === viewName) {
+                        el.classList.remove('hidden');
+                        el.classList.remove('view-transition');
+                        void el.offsetWidth;
+                        el.classList.add('view-transition');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+
+            const btnHeaderDash = document.getElementById('btnHeaderDashboard');
+            const headerBadge = document.getElementById('headerSessionBadge');
+            if (viewName === 'landing') {
+                btnHeaderDash.classList.add('hidden');
+                headerBadge.classList.add('hidden');
+            } else {
+                btnHeaderDash.classList.remove('hidden');
+                if (viewName === 'quiz' || viewName === 'essay') {
+                    headerBadge.classList.remove('hidden');
+                } else {
+                    headerBadge.classList.add('hidden');
+                }
+            }
+
+            if (viewName === 'dashboard') {
+                renderDashboard();
+            } else if (viewName === 'quiz') {
+                renderQuestion();
+            } else if (viewName === 'results') {
+                renderResults();
+            } else if (viewName === 'essay') {
+                renderEssay();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            lucide.createIcons();
+        }
+
+        function startQuizFromDashboard() {
+            navigateTo('quiz');
+        }
+
+        // =====================================================================
+        // 5. DASHBOARD RENDERER
+        // =====================================================================
+        function renderDashboard() {
+            const stats = calculateStats();
+            const activeNum = String(appState.currentQuestionIndex + 1).padStart(2, '0');
+
+            document.getElementById('dashProgressText').textContent = `${stats.revealedCount} / 35 Selesai (${stats.progressPercent}%)`;
+            document.getElementById('dashProgressBar').style.width = `${stats.progressPercent}%`;
+            document.getElementById('dashActiveSoal').textContent = `Nomor ${activeNum}`;
+            document.getElementById('dashScoreSummary').textContent = `Benar: ${stats.correctCount} | Salah: ${stats.wrongCount}`;
+
+            const startBtnLabel = document.getElementById('btnStartPGLabel');
+            if (stats.revealedCount > 0 || appState.currentQuestionIndex > 0) {
+                startBtnLabel.textContent = `LANJUTKAN PILIHAN GANDA (SOAL ${activeNum})`;
+            } else {
+                startBtnLabel.textContent = `MULAI PILIHAN GANDA`;
+            }
+
+            // Render Mini 35 Grid
+            const miniGrid = document.getElementById('dashMiniGrid');
+            miniGrid.innerHTML = '';
+            appState.pgStates.forEach((st, idx) => {
+                const q = multipleChoiceQuestions[idx];
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = String(idx + 1).padStart(2, '0');
+                btn.onclick = () => {
+                    appState.currentQuestionIndex = idx;
+                    navigateTo('quiz');
+                };
+
+                let colorClass = 'bg-slate-800/80 border-slate-600/50 text-slate-300 hover:border-cyberCyan';
+                if (st.revealed) {
+                    if (st.selected === q.correct) {
+                        colorClass = 'bg-correctGreen/25 border-correctGreen text-correctGreen font-bold';
+                    } else {
+                        colorClass = 'bg-wrongRed/25 border-wrongRed text-wrongRed font-bold';
+                    }
+                } else if (st.locked) {
+                    colorClass = 'bg-amber-500/25 border-amber-400 text-amber-300 font-bold';
+                } else if (idx === appState.currentQuestionIndex) {
+                    colorClass = 'bg-electricBlue/30 border-cyberCyan text-cyberCyan font-bold';
+                }
+
+                btn.className = `py-1.5 rounded-lg border text-xs font-mono transition cursor-pointer ${colorClass}`;
+                miniGrid.appendChild(btn);
+            });
+        }
+
+        // =====================================================================
+        // 6. MULTIPLE CHOICE QUIZ ENGINE (5-STAGE PEDAGOGICAL FLOW)
+        // =====================================================================
+        function renderQuestion() {
+            const idx = appState.currentQuestionIndex;
+            const qData = multipleChoiceQuestions[idx];
+            const qState = appState.pgStates[idx];
+            const stats = calculateStats();
+
+            // Header Indicators
+            const paddedNum = String(qData.number).padStart(2, '0');
+            document.getElementById('quizNumberIndicator').textContent = paddedNum;
+            document.getElementById('bigQuestionNum').textContent = paddedNum;
+            document.getElementById('questionText').textContent = qData.question;
+
+            // Progress Bar
+            document.getElementById('quizProgressPercent').textContent = `${stats.progressPercent}%`;
+            document.getElementById('quizProgressBar').style.width = `${Math.max(3, stats.progressPercent)}%`;
+
+            // Status Badge (Belum dibahas / Sedang dibahas / Sudah dibahas)
+            const statusBadge = document.getElementById('quizStatusBadge');
+            if (qState.revealed) {
+                statusBadge.className = 'px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 bg-correctGreen/20 text-correctGreen border border-correctGreen/50';
+                statusBadge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-correctGreen"></span><span>Status: Sudah Dibahas</span>`;
+            } else {
+                statusBadge.className = 'px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 bg-cyberCyan/20 text-cyberCyan border border-cyberCyan/50';
+                statusBadge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-cyberCyan animate-pulse"></span><span>Status: Sedang Dibahas</span>`;
+            }
+
+            // Render Options A - E
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            const optionKeys = ['A', 'B', 'C', 'D', 'E'];
+
+            optionKeys.forEach(key => {
+                const optionText = qData.options[key];
+                const isSelected = qState.selected === key;
+                const isCorrect = qData.correct === key;
+
+                const card = document.createElement('div');
+                let cardClasses = 'option-card glass-card-light rounded-2xl p-4 sm:p-5 lg:p-6 border-2 flex items-center justify-between gap-4 ';
+                let badgeClasses = 'w-11 h-11 sm:w-12 sm:h-12 rounded-xl font-mono font-extrabold text-lg sm:text-xl flex items-center justify-center shrink-0 transition-colors ';
+                let rightTagHTML = '';
+
+                if (!qState.revealed) {
+                    // TAHAP 1, 2, atau 3 (Jawaban benar BELUM boleh terlihat!)
+                    if (qState.locked) {
+                        cardClasses += 'locked-option ';
+                    }
+
+                    if (isSelected) {
+                        cardClasses += 'neon-border-cyan bg-cyberCyan/15 ';
+                        badgeClasses += 'bg-cyberCyan text-deepNavy shadow-md shadow-cyberCyan/40 ';
+                        rightTagHTML = `
+                            <span class="px-3.5 py-1.5 rounded-xl bg-cyberCyan/20 border border-cyberCyan text-cyberCyan font-mono font-bold text-xs sm:text-sm shrink-0 flex items-center gap-1.5">
+                                <i data-lucide="${qState.locked ? 'lock' : 'check-circle'}" class="w-4 h-4"></i>
+                                <span>JAWABAN KELAS${qState.locked ? ' (TERKUNCI)' : ''}</span>
+                            </span>
+                        `;
+                    } else {
+                        cardClasses += 'border-white/15 ';
+                        badgeClasses += 'bg-deepNavy/90 border border-white/20 text-cyberCyan ';
+                    }
+                } else {
+                    // TAHAP 4: JAWABAN BENAR TELAH DIBUKA OLEH GURU
+                    cardClasses += 'locked-option ';
+
+                    if (isCorrect) {
+                        cardClasses += 'neon-border-green ';
+                        badgeClasses += 'bg-correctGreen text-deepNavy ';
+                        rightTagHTML = `
+                            <span class="px-3.5 py-1.5 rounded-xl bg-correctGreen/25 border border-correctGreen text-correctGreen font-mono font-bold text-xs sm:text-sm shrink-0 flex items-center gap-1.5">
+                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                                <span>JAWABAN BENAR</span>
+                            </span>
+                        `;
+                    } else if (isSelected && !isCorrect) {
+                        cardClasses += 'neon-border-red ';
+                        badgeClasses += 'bg-wrongRed text-white ';
+                        rightTagHTML = `
+                            <span class="px-3.5 py-1.5 rounded-xl bg-wrongRed/25 border border-wrongRed text-wrongRed font-mono font-bold text-xs sm:text-sm shrink-0 flex items-center gap-1.5">
+                                <i data-lucide="x-circle" class="w-5 h-5"></i>
+                                <span>JAWABAN KELAS (KURANG TEPAT)</span>
+                            </span>
+                        `;
+                    } else {
+                        cardClasses += 'border-white/10 opacity-60 ';
+                        badgeClasses += 'bg-deepNavy/80 text-slate-400 ';
+                    }
+                }
+
+                card.className = cardClasses;
+                card.onclick = () => selectOption(key);
+
+                card.innerHTML = `
+                    <div class="flex items-center gap-4 sm:gap-5 flex-1">
+                        <div class="${badgeClasses}">${key}</div>
+                        <div class="text-base sm:text-lg lg:text-xl font-medium text-white leading-snug">${optionText}</div>
+                    </div>
+                    ${rightTagHTML}
+                `;
+
+                optionsContainer.appendChild(card);
+            });
+
+            updateTeacherControls(qData, qState);
+            lucide.createIcons();
+        }
+
+        function updateTeacherControls(qData, qState) {
+            const stagePill = document.getElementById('stageIndicatorPill');
+            const instructionText = document.getElementById('teacherInstructionText');
+            const selectedDisplay = document.getElementById('selectedClassAnswerDisplay');
+            const btnLock = document.getElementById('btnLockAnswer');
+            const btnReveal = document.getElementById('btnRevealAnswer');
+            const explanationBox = document.getElementById('explanationBox');
+            const btnPrev = document.getElementById('btnPrevSoal');
+            const btnNextText = document.getElementById('btnNextSoalText');
+
+            btnPrev.disabled = appState.currentQuestionIndex === 0;
+            btnNextText.textContent = appState.currentQuestionIndex === 34 ? 'HASIL LATIHAN KELAS' : 'SOAL BERIKUTNYA';
+
+            if (qState.selected) {
+                selectedDisplay.textContent = `Opsi ${qState.selected}`;
+                selectedDisplay.className = 'font-mono font-extrabold text-base sm:text-lg text-cyberCyan';
+            } else {
+                selectedDisplay.textContent = 'Belum Dipilih';
+                selectedDisplay.className = 'font-mono font-extrabold text-base sm:text-lg text-slate-400';
+            }
+
+            if (!qState.selected && !qState.locked && !qState.revealed) {
+                // TAHAP 1: Tampilkan Soal
+                stagePill.textContent = 'TAHAP 1/5 • DISKUSI';
+                instructionText.innerHTML = 'Siswa berdiskusi bersama sebelum guru menyentuh salah satu pilihan <strong>A–E</strong> sebagai <strong>Jawaban Kelas</strong>.';
+                btnLock.disabled = true;
+                btnReveal.disabled = true;
+                explanationBox.classList.add('hidden');
+            } else if (qState.selected && !qState.locked && !qState.revealed) {
+                // TAHAP 2: Pilih Jawaban Kelas
+                stagePill.textContent = 'TAHAP 2/5 • DIPILIH';
+                instructionText.innerHTML = `Opsi <strong>${qState.selected}</strong> ditandai sebagai Jawaban Kelas. Anda masih dapat mengubah pilihan atau menekan <strong>KUNCI JAWABAN KELAS</strong>.`;
+                btnLock.disabled = false;
+                btnReveal.disabled = true;
+                explanationBox.classList.add('hidden');
+            } else if (qState.locked && !qState.revealed) {
+                // TAHAP 3: Kunci Jawaban
+                stagePill.textContent = 'TAHAP 3/5 • TERKUNCI';
+                instructionText.innerHTML = `Jawaban Kelas (<strong>${qState.selected}</strong>) dikunci sementara. Tekan tombol hijau <strong>TAMPILKAN JAWABAN BENAR</strong>.`;
+                btnLock.disabled = true;
+                btnReveal.disabled = false;
+                explanationBox.classList.add('hidden');
+            } else if (qState.revealed) {
+                // TAHAP 4: Tampilkan Jawaban Benar
+                stagePill.textContent = 'TAHAP 4/5 • PEMBAHASAN';
+                instructionText.innerHTML = 'Kunci jawaban dan pembahasan ditampilkan. Lanjutkan ke <strong>SOAL BERIKUTNYA</strong> setelah diskusi selesai.';
+                btnLock.disabled = true;
+                btnReveal.disabled = true;
+
+                explanationBox.classList.remove('hidden');
+                const isClassCorrect = qState.selected === qData.correct;
+                const feedbackIcon = document.getElementById('feedbackIconWrapper');
+                const feedbackTitle = document.getElementById('feedbackTitle');
+                const feedbackSubtitle = document.getElementById('feedbackSubtitle');
+
+                if (isClassCorrect) {
+                    explanationBox.className = 'rounded-3xl p-6 sm:p-8 border-2 border-correctGreen bg-correctGreen/10 shadow-xl shadow-correctGreen/15 view-transition';
+                    feedbackIcon.className = 'w-12 h-12 rounded-2xl bg-correctGreen text-deepNavy flex items-center justify-center shrink-0';
+                    feedbackIcon.innerHTML = `<i data-lucide="trophy" class="w-7 h-7"></i>`;
+                    feedbackTitle.className = 'font-display font-extrabold text-lg sm:text-2xl tracking-wide text-correctGreen';
+                    feedbackTitle.textContent = 'HEBAAT! JAWABAN KELAS BENAR';
+                    feedbackSubtitle.textContent = `Pilihan kelas (${qState.selected}) sesuai dengan kunci jawaban.`;
+                } else {
+                    explanationBox.className = 'rounded-3xl p-6 sm:p-8 border-2 border-wrongRed bg-wrongRed/10 shadow-xl shadow-wrongRed/15 view-transition';
+                    feedbackIcon.className = 'w-12 h-12 rounded-2xl bg-wrongRed text-white flex items-center justify-center shrink-0';
+                    feedbackIcon.innerHTML = `<i data-lucide="alert-circle" class="w-7 h-7"></i>`;
+                    feedbackTitle.className = 'font-display font-extrabold text-lg sm:text-2xl tracking-wide text-wrongRed';
+                    feedbackTitle.textContent = 'YUK PELAJARI KEMBALI';
+                    feedbackSubtitle.textContent = `Jawaban kelas adalah (${qState.selected}), sedangkan jawaban yang benar adalah (${qData.correct}).`;
+                }
+
+                document.getElementById('correctKeyBadge').textContent = `${qData.correct}. ${qData.options[qData.correct]}`;
+                document.getElementById('explanationText').textContent = qData.explanation;
+            }
+        }
+
+        function selectOption(optionKey) {
+            const idx = appState.currentQuestionIndex;
+            const qState = appState.pgStates[idx];
+
+            if (qState.locked || qState.revealed) {
+                return;
+            }
+
+            qState.selected = optionKey;
+            saveState();
+            renderQuestion();
+        }
+
+        function lockClassAnswer() {
+            const idx = appState.currentQuestionIndex;
+            const qState = appState.pgStates[idx];
+
+            if (!qState.selected || qState.locked) return;
+
+            qState.locked = true;
+            saveState();
+            renderQuestion();
+            showToast(`Jawaban Kelas (${qState.selected}) dikunci!`);
+        }
+
+        function revealCorrectAnswer() {
+            const idx = appState.currentQuestionIndex;
+            const qState = appState.pgStates[idx];
+
+            if (!qState.locked || qState.revealed) return;
+
+            qState.revealed = true;
+            saveState();
+            renderQuestion();
+
+            setTimeout(() => {
+                const expBox = document.getElementById('explanationBox');
+                if (expBox) {
+                    expBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 120);
+        }
+
+        function repeatCurrentQuestion() {
+            const idx = appState.currentQuestionIndex;
+            appState.pgStates[idx] = {
+                selected: null,
+                locked: false,
+                revealed: false
+            };
+            saveState();
+            renderQuestion();
+            showToast(`Soal ${String(idx + 1).padStart(2, '0')} diulang kembali.`);
+        }
+
+        function skipCurrentQuestion() {
+            if (appState.currentQuestionIndex < 34) {
+                appState.currentQuestionIndex++;
+                saveState();
+                renderQuestion();
+                showToast(`Melewati ke Soal ${String(appState.currentQuestionIndex + 1).padStart(2, '0')}`);
+            } else {
+                navigateTo('results');
+            }
+        }
+
+        function prevQuestion() {
+            if (appState.currentQuestionIndex > 0) {
+                appState.currentQuestionIndex--;
+                saveState();
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (appState.currentQuestionIndex < 34) {
+                appState.currentQuestionIndex++;
+                saveState();
+                renderQuestion();
+            } else {
+                navigateTo('results');
+            }
+        }
+
+        // =====================================================================
+        // 7. NAVIGATOR MODAL (1 - 35)
+        // =====================================================================
+        function toggleNavigatorModal(show) {
+            const modal = document.getElementById('navigatorModal');
+            if (!show) {
+                modal.classList.add('hidden');
+                return;
+            }
+
+            const grid = document.getElementById('modalNumberGrid');
+            grid.innerHTML = '';
+
+            appState.pgStates.forEach((st, idx) => {
+                const q = multipleChoiceQuestions[idx];
+                const btn = document.createElement('button');
+                btn.type = 'button';
+
+                let btnStyle = 'bg-slate-800/90 border-slate-600 text-slate-200 hover:border-cyberCyan ';
+                let statusSub = 'Belum';
+
+                if (st.revealed) {
+                    if (st.selected === q.correct) {
+                        btnStyle = 'bg-correctGreen/25 border-correctGreen text-correctGreen ';
+                        statusSub = `Benar (${st.selected})`;
+                    } else {
+                        btnStyle = 'bg-wrongRed/25 border-wrongRed text-wrongRed ';
+                        statusSub = `Salah (${st.selected})`;
+                    }
+                } else if (st.locked) {
+                    btnStyle = 'bg-amber-500/25 border-amber-400 text-amber-300 ';
+                    statusSub = `Kunci: ${st.selected}`;
+                } else if (idx === appState.currentQuestionIndex) {
+                    btnStyle = 'bg-electricBlue/35 border-cyberCyan text-white ring-2 ring-cyberCyan/50 ';
+                    statusSub = 'Aktif';
+                }
+
+                btn.className = `p-3 rounded-2xl border-2 flex flex-col items-center justify-center transition cursor-pointer ${btnStyle}`;
+                btn.innerHTML = `
+                    <span class="font-mono font-extrabold text-lg sm:text-xl">${String(idx + 1).padStart(2, '0')}</span>
+                    <span class="text-[10px] font-semibold mt-0.5 opacity-90">${statusSub}</span>
+                `;
+
+                btn.onclick = () => {
+                    appState.currentQuestionIndex = idx;
+                    saveState();
+                    toggleNavigatorModal(false);
+                    renderQuestion();
+                };
+
+                grid.appendChild(btn);
+            });
+
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        // =====================================================================
+        // 8. RESULTS CALCULATOR & RENDERER
+        // =====================================================================
+        function calculateStats() {
+            let revealedCount = 0;
+            let correctCount = 0;
+            let wrongCount = 0;
+
+            appState.pgStates.forEach((st, idx) => {
+                if (st.revealed) {
+                    revealedCount++;
+                    if (st.selected === multipleChoiceQuestions[idx].correct) {
+                        correctCount++;
+                    } else {
+                        wrongCount++;
+                    }
+                }
+            });
+
+            const progressPercent = Math.round((revealedCount / 35) * 100);
+            const accuracyPercent = revealedCount > 0 ? Math.round((correctCount / revealedCount) * 100) : 0;
+
+            return {
+                revealedCount,
+                correctCount,
+                wrongCount,
+                progressPercent,
+                accuracyPercent
+            };
+        }
+
+        function renderResults() {
+            const stats = calculateStats();
+
+            document.getElementById('resultCorrectCount').textContent = stats.correctCount;
+            document.getElementById('resultWrongCount').textContent = stats.wrongCount;
+            document.getElementById('resultPercentText').textContent = `${stats.accuracyPercent}%`;
+            document.getElementById('resultDiscussedCount').textContent = `${stats.revealedCount} dari 35 Soal Telah Dibahas`;
+            document.getElementById('resultProgressPercent').textContent = `${stats.progressPercent}%`;
+            document.getElementById('resultProgressBar').style.width = `${stats.progressPercent}%`;
+
+            // Animate SVG Circle
+            const circumference = 314.16;
+            const offset = circumference - (stats.accuracyPercent / 100) * circumference;
+            setTimeout(() => {
+                document.getElementById('resultCircleArc').style.strokeDashoffset = offset;
+            }, 100);
+
+            // Motivation Message
+            const msgEl = document.getElementById('motivationMessage');
+            if (stats.revealedCount === 0) {
+                msgEl.textContent = "BELUM ADA SOAL YANG DIBAHAS. AYO MULAI DISKUSI KELAS SEKARANG!";
+            } else {
+                msgEl.textContent = "HEBAT! TERUS KEMBANGKAN KETERAMPILAN DIGITAL DAN KEMAMPUAN PROFESIONALMU.";
+            }
+        }
+
+        // =====================================================================
+        // 9. ESSAY SECTION RENDERER (5 SOAL)
+        // =====================================================================
+        function renderEssay() {
+            const idx = appState.currentEssayIndex;
+            const essay = essayQuestions[idx];
+            const padded = String(essay.number).padStart(2, '0');
+
+            document.getElementById('essayNumberIndicator').textContent = padded;
+            document.getElementById('essayBigNum').textContent = padded;
+            document.getElementById('essayQuestionText').textContent = essay.question;
+            document.getElementById('essayDiscussionInput').value = appState.essayNotes[idx] || '';
+
+            const pillsContainer = document.getElementById('essayStepPills');
+            pillsContainer.innerHTML = '';
+            essayQuestions.forEach((item, i) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = `0${item.number}`;
+                const isActive = i === idx;
+                btn.className = isActive
+                    ? 'w-10 h-10 rounded-xl bg-goldAccent text-deepNavy font-mono font-extrabold text-sm shadow-md shadow-goldAccent/30 cursor-pointer'
+                    : 'w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 font-mono font-bold text-sm border border-white/15 cursor-pointer';
+                btn.onclick = () => {
+                    appState.currentEssayIndex = i;
+                    saveState();
+                    renderEssay();
+                };
+                pillsContainer.appendChild(btn);
+            });
+
+            document.getElementById('btnPrevEssay').disabled = idx === 0;
+            document.getElementById('btnNextEssayText').textContent = idx === 4 ? 'SELESAI & KE DASHBOARD' : 'BERIKUTNYA';
+            lucide.createIcons();
+        }
+
+        function saveEssayNote(val) {
+            appState.essayNotes[appState.currentEssayIndex] = val;
+            saveState();
+        }
+
+        function clearCurrentEssayNote() {
+            appState.essayNotes[appState.currentEssayIndex] = '';
+            document.getElementById('essayDiscussionInput').value = '';
+            saveState();
+            showToast('Catatan diskusi essay dibersihkan.');
+        }
+
+        function prevEssay() {
+            if (appState.currentEssayIndex > 0) {
+                appState.currentEssayIndex--;
+                saveState();
+                renderEssay();
+            }
+        }
+
+        function nextEssay() {
+            if (appState.currentEssayIndex < 4) {
+                appState.currentEssayIndex++;
+                saveState();
+                renderEssay();
+            } else {
+                navigateTo('dashboard');
+                showToast('Sesi Essay Selesai! Kembali ke Dashboard.');
+            }
+        }
+
+        // =====================================================================
+        // 10. RESET PRACTICE & FULLSCREEN & KEYBOARD SUPPORT
+        // =====================================================================
+        function openResetModal() {
+            document.getElementById('resetModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeResetModal() {
+            document.getElementById('resetModal').classList.add('hidden');
+        }
+
+        function executeResetPractice() {
+            appState = {
+                currentView: 'dashboard',
+                currentQuestionIndex: 0,
+                currentEssayIndex: 0,
+                pgStates: Array.from({ length: 35 }, () => ({
+                    selected: null,
+                    locked: false,
+                    revealed: false
+                })),
+                essayNotes: Array.from({ length: 5 }, () => "")
+            };
+            saveState();
+            closeResetModal();
+            navigateTo('dashboard');
+            showToast('Latihan KKA XII TKJ berhasil di-reset!');
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {
+                    showToast('Mode layar penuh tidak didukung oleh browser ini.');
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            const icon = document.getElementById('fullscreenIcon');
+            const text = document.getElementById('fullscreenText');
+            if (document.fullscreenElement) {
+                icon.setAttribute('data-lucide', 'minimize');
+                text.textContent = 'Exit Fullscreen';
+            } else {
+                icon.setAttribute('data-lucide', 'maximize');
+                text.textContent = 'Fullscreen';
+            }
+            lucide.createIcons();
+        });
+
+        // Keyboard Shortcuts for Teacher Convenience
+        document.addEventListener('keydown', (e) => {
+            if (document.activeElement && document.activeElement.tagName === 'TEXTAREA') return;
+
+            if (appState.currentView === 'quiz') {
+                const keyUpper = e.key.toUpperCase();
+                if (['A', 'B', 'C', 'D', 'E'].includes(keyUpper)) {
+                    selectOption(keyUpper);
+                } else if (e.key === 'ArrowRight') {
+                    nextQuestion();
+                } else if (e.key === 'ArrowLeft') {
+                    prevQuestion();
+                }
+            } else if (appState.currentView === 'essay') {
+                if (e.key === 'ArrowRight') {
+                    nextEssay();
+                } else if (e.key === 'ArrowLeft') {
+                    prevEssay();
+                }
+            }
+        });
+
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const msgEl = document.getElementById('toastMessage');
+            msgEl.textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            navigateTo(appState.currentView || 'landing');
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
